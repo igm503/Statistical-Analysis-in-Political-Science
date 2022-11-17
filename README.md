@@ -7,6 +7,9 @@ These are investigations of the relationship between moral, political, and relig
 A critical replication and extension of an Djupe et. al.'s "Reconsidering the Role of Politics in Leaving Religion: The Importance of Affiliation," 
 which is a study of the effect of political identity on, separately, religious identity and affiliation with a religious congregation. 
 
+The replication data provided by the authors is hosted at https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWZZLO
+
+
 ## Moral Belief and Belief in God
 
 This is an independent study using panel data. I theorize that participants in the panel whose moral evaluations weaken--that is, who come to see fewer issues 
@@ -21,3 +24,5 @@ An appendix contains an introduction to MLE, ologit, gologit, and MLE estimation
 
 This is a critical examination of Moral Foundations Theory. I give a theoretical argument against Moral Foundations Theory and investigate whether survey 
 data supports that argument.
+
+The data is the "Measuring Morality" dataset provided by the Kenan Institute for Ethics at Duke University. The data can be found here: https://kenan.ethics.duke.edu/attitudes/resources/measuring-morality/
