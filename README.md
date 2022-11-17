@@ -25,6 +25,6 @@ An appendix contains an introduction to MLE, ologit, gologit, and MLE estimation
 ## Moral Foundations
 
 This is a critical examination of Moral Foundations Theory. I give a theoretical argument against Moral Foundations Theory and investigate whether survey 
-data supports that argument.
+data supports that argument. I conclude that the data only ambiguously supports MFT. 
 
 The data is the "Measuring Morality" dataset provided by the Kenan Institute for Ethics at Duke University. The data can be found here: https://kenan.ethics.duke.edu/attitudes/resources/measuring-morality/
