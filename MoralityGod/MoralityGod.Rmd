@@ -3,9 +3,7 @@ title: "Morality and Religious Belief"
 author: "Ian Myers"
 date: "3/17/2020"
 geometry: margin=4cm
-output:
-  github_document:
-    pandoc_args: --webtex
+output: pdf_document
 
 ---
 
@@ -104,12 +102,12 @@ data <- filter_at(data, vars(AbortionDiff,GenEngineeringDiff,Income,Age,Male,Bla
 
 ```
 
-```{r pressure, echo=FALSE, include=FALSE}
+```{r pressure, echo=TRUE, include=FALSE}
 
 #linear model and regression
 
 linear <- lm(GodDiff ~ AbortionDiff + GenEngineeringDiff + PIDDiff + PID + Income + Age + Male + Black + Asian + Hispanic + AmericanIndian + Democrat + Republican, data)
-stargazer(linear)
+stargazer(linear, type='html')
 
 ```
 
@@ -239,11 +237,43 @@ data$GodDiffFactor = factor(data$GodDiffSign)
 #regression
 
 ologit = polr(GodDiffFactor ~ AbortionDiff + GenEngineeringDiff + Income + Age + Male, data=data, Hess=TRUE)
-stargazer(ologit, type='html')
+stargazer(ologit)
 brant(ologit)
 
 ```
 
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & GodDiffFactor \\ 
+\hline \\[-1.8ex] 
+ AbortionDiff & 0.126 \\ 
+  & (0.078) \\ 
+  & \\ 
+ GenEngineeringDiff & 0.191$^{***}$ \\ 
+  & (0.067) \\ 
+  & \\ 
+ Income & $-$0.028$^{*}$ \\ 
+  & (0.016) \\ 
+  & \\ 
+ Age & 0.020$^{***}$ \\ 
+  & (0.006) \\ 
+  & \\ 
+ Male & $-$0.371$^{**}$ \\ 
+  & (0.187) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 727 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
 ## Conclusion
 
 The results summarized above indicate that changes in an individual's estimation of the saliency of moral standards to certain practical questions are connected to changes in that individual's certainty in the existence of God. Someone who has become less concerned with the moral sides of certain questions is likely also to have become less sure that God exists, and vice versa. They moreover suggest that this connection between the two changes at least partially independent of changes in political identification.
