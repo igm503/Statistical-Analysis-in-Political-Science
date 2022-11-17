@@ -15,6 +15,8 @@ are positive, but weaker than I expected. The main weakness of this investigatio
 for measuring the "strength" of a participant's moral evaluations, and those questions are about abortion and genetic engineering, which are more politically
 charged than I'd like the questions to be.
 
+An appendix contains an introduction to MLE, ologit, gologit, and MLE estimation of those models.
+
 ## Moral Foundations
 
 This is a critical examination of Moral Foundations Theory. I give a theoretical argument against Moral Foundations Theory and investigate whether survey 
