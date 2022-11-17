@@ -1,0 +1,762 @@
+---
+title: "Replication and Extension of 'Reconsidering the Role of Politics in Leaving Religion: The Importance of Affiliation'"
+author: "Ian Myers"
+geometry: margin=2.55cm
+output:
+  github_document:
+    pandoc_args: --webtex
+---
+
+Djupe, P. A., Neiheisel, J. R., & Sokhey, A. E. (2017). Reconsidering the Role of Politics in Leaving Religion: The Importance of Affiliation. American Journal of Political Science, 62(1), 161-175. doi:10.1111/ajps.12308
+
+**Djupe et. al.'s Research Question**
+
+The question Djupe et. al.'s are interested in answering is a question which falls in the territory of the broader question, How do political beliefs and behaviors and religious beiefs and behaviors affect one another? Djupe et. al. note that although religious beliefs and behaviors has been studied extensively as determinants of political beiefs and behavior, religious beliefs and behaviors have received less treatment as effects of political beliefs and behaviors. And while they note a recent increase in the study of the effects of politics on religion, they remark in turn that that study has been restricted primarily to the effects of politics on religious \textit{identity}. 
+
+But such a focus, they continue, ignores the related but distinct phenomenon of \textit{affiliation} with a particular place of worship. Now, one might ask why this matters. After all, although the event of disaffiliating from a place of worship is admittedly not the same as the event of disidentification from the religion practiced at that place of worship, these two events surely occur, for the most part, in quick succession and as part of one larger event, that of the loss of faith or of faith that conforms to the requirements of a particular religion. But, granting all this, there remains the following consideration. Even if disaffiliation and disidentification for the most part follow upon one another, is it not possible that the two events are the result of causal sequences which are, at least to some degree, separable? And if this partial separability of the causal sequences is borne out by research, then do we not need to understand disaffiliation, in addition to disidentification, in order to understand the exact ways in which political beliefs and behaviors affect religious beliefs and behaviors? 
+
+Djupe et. al. suspect that these causal processes are in fact separable. Much of the existing literature at the time of this article's publication, Djupe et. al. claim, speaks to the effects of the rise of the Christian Right on liberal Americans' religious identification. As the Christian Right gained national prominence, liberal Americans became more likely to affirm no religious preference or to identify themselves as "religious nones." The causal process most often posited to explain this phenomenon is that of national publicity of the Christian Right leading some Christian liberals to associate their religious identity with a political identity they are opposed to and, in light of this conflict, taking the side of their political beliefs and relinquishing their religious beliefs. This causal process, of course, is one that connects political beliefs to the choice to disidentify by means of agents' awarenesses of broader social and political phenomena. But in the case of disaffiliation, Djupe et. al. suggest, the connection between political beliefs and the choice to disaffiliate from a place of worship would likely involve the agents' awareness of social and political phenomena within their place of worship. More concretely, what Djupe et. al. suggest is that the decision to disaffiliate is likely determined in part by awareness of political and other differences between oneself and one's congregation. 
+
+This hypothesis can be seen to be sensible in light of the following two considerations. For the first consideration, we return to the simple theoretical explanation given above of the rise of liberal religious nones after the rise of the Christian Right. We can imagine two liberal Christians who are equal in their opposition to the Christian Right and in all other respects except in that the first goes to an Evangelical church and the second to a more liberal mainline Protestant church. Although both will, in light of their awareness of the national phenomenon of the Christian right, associate a set of political principles they oppose with their religion \textit{in some way} (although the CR is associated more with Evangelicals than mainline Protestants, both are associated by way of being Christian groups), the mainline Protestant liberal will be less inclined to associate the principles of the CR with their particular faith if, as is likely, principles and candidates of the CR are less often endorsed or not at all endorsed in their congregation. Hence the local level of support for the CR should play some role in determining the application of the CR -> disidentification process mentioned above. For the second consideration, we look to the case of two Christian Americans who, on account of, say, the "summer melt," for a period of time substantially decrease their religious attendance and, afterwards, begin to plan on returning to their normal attendance habits. If, however, both are opposed to the CR, then if one of these Christians is a part of a congregation that supports CR principles and candidates, then they will likely be more inclined to consider switching to a church which does not so strongly support the CR. If, after all, the choice to stay or remain in a religious organization can be modelled as the result of some species of cost-benefit analysis, then the presence of a distasteful set of political beliefs in one's congregation should increase the perceived cost of remaining in that congregation even if it does not lead one to consider leaving one's faith. 
+
+Of course, opposition to the CR is not the only political consideration that might lead one to consider leaving one's congregation. Any number of more restricted political differences could play a similar role. Hence this, broadly speaking, is the question Djupe et. al. set out to answer: Do political beliefs affect an individual's decision to stay or leave their congregation \textit{independently} of evaluations of their political fit in that congregation, or does this evaluation of political fit play a role in that decision?
+
+
+**Data**
+
+Djupe et. al. perform regression analyses on three different sets of data in this article. All three are two-stage panel datasets consisting of surveys which inquire about political beliefs, religious beliefs, disaffiliation, and other controls. I will only replicate Djupe et. al.'s results taken from the data that I will be using in my extension. I will provide my justification for selecting this dataset at the beginning of the \textit{Extension} section of this paper. This data is a panel dataset gathered in 2012. The first wave consists of responses to a survey from mid-OCtober 2012. The second wave consists of responses to a follow up survey sent out in late November of the same year. of the 1,753 individuals who responded to the first survey, 1,097 responded to the second survey. 
+
+The surveys asked about religious identity, place of worship attendance, perceived differences between the respondent and the congregation at the place of worship, and feelings toward Christian fundamentalists. The second survey also asked whether the respondent had disaffiliated from the place of worship they attended when the first survey was sent out. 
+
+Included below is the code I have used to prepare the data for regression in accordance with Djupe et. al.'s specifications, given in their codebook available at the Harvard Dataverse.
+
+
+```{r setup, include=FALSE}
+
+rm(list=ls())
+library(car)
+library(MASS)
+library(stargazer)
+library(haven)
+library(texreg)
+library(psych)
+library(ggplot2)
+library(arm)
+library(knitr)
+library(pryr)
+library(Hmisc)
+```
+
+
+```{r echo = FALSE}
+data <- read_dta("data/2012_merged.dta")
+
+##INDEPENDENT VARIABLES
+
+#differences with church - collapsed so that very diff/different=1, very sim/similar=0.
+
+names(data)[c(26, 27, 28, 29, 30, 31, 32)] <- c("wrd1", "wrd2", "wrd3", "wrd4", "wrd5", "wrd6", "wrd7")
+data$wrd1c <- as.numeric(data$wrd1 == 1 | data$wrd1 == 2) 
+data$wrd2c <- as.numeric(data$wrd2 == 1 | data$wrd2 == 2) 
+data$wrd3c <- as.numeric(data$wrd3 == 1 | data$wrd3 == 2) 
+data$wrd4c <- as.numeric(data$wrd4 == 1 | data$wrd4 == 2) 
+data$wrd5c <- as.numeric(data$wrd5 == 1 | data$wrd5 == 2) 
+data$wrd6c <- as.numeric(data$wrd6 == 1 | data$wrd6 == 2) 
+data$wrd7c <- as.numeric(data$wrd7 == 1 | data$wrd7 == 2) 
+
+#Differences with the Church 
+matrix <- data[c(26, 27, 28, 29, 30, 31, 32)]
+data$wrdt1 <- rowMeans(matrix, na.rm = TRUE)
+data$wrdt1c <- (data$wrdt1-1)/3
+
+#Partisanship, 7 point scale
+data$pid7 <- data$q7-1
+
+#Partisan difference with church
+data$q23_26 <- (data$q23_2/100)*6 
+data$partisanDifference <- abs(as.numeric(data$pid7)-data$q23_26)
+
+#Attendance, wave 1
+data$attendw1 <- data$q52
+
+#Political Interest, wave 1
+data$politicalInterest <- (6-data$q2)
+
+#Church discussant, wave 1
+#(There were two versions of the network battery.)
+data$net_churchc <- as.numeric(data$q121_6 == 1 | data$q122_6 == 1 | data$q123_6 == 1 | 
+                                 data$q124_6 == 1 | data$q741_6 == 1 | data$q742_6 == 1 |
+                                 data$q743_6 == 1 | data$q744_6 == 1)
+
+data$net_churchc[is.na(data$net_churchc)] <- 0
+
+#Feelings twd Christian Fundamentalists, wave 2
+data$cfund <- data$w69_5
+data$christianFundamentalism <- data$w69_5/100 
+
+#Ideology
+data$ideology <- data$q8 
+
+#Female
+data$female <- data$q83-1 
+
+#Income
+data$income <- data$q48
+
+#Education
+data$education <- data$q54
+
+#Age
+data$age <- 2012-data$q44_1
+
+
+##Religious Tradition Variables
+#reltrad - 1=mainline, 2=evangelical, 3=catholic, 4=black protestant, 5=Jewish, 6=Muslim, 
+#7=American Christian (LDS and JWs), #8=Other, Non Christian, 9=Nothing institutional (religious nones), 
+#10=Atheist/Agnostic
+
+#African-americans Protestants
+data$reltrad <- 4 * as.numeric(data$q49 == 1 & (data$q50==1 | data$q50==3))
+
+#mainliners are non-born again protestants or other christians.
+data$reltrad[data$q49 > 1 & (data$q50 == 1 | data$q50 == 3) & data$q51 == 2] <- 1
+
+#evangelicals, therefore, are born again prots or OCs (and not black).
+data$reltrad[data$q49 > 1 & (data$q50 == 1 | data$q50 == 3) & data$q51 == 1] <- 2
+
+#Catholics, Jews,  Muslims, Nones, and Atheists
+data$reltrad[data$q50 == 2] <- 3
+data$reltrad[data$q50 == 4] <- 5
+data$reltrad[data$q50 == 5] <- 6
+data$reltrad[data$q50 == 6] <- 9 
+data$reltrad[data$q50 == 7] <- 10
+
+#Now sorting responses for "other"
+#First for Blacks
+data$reltrad[data$q50_text=="APOSTOLIC" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="BAPTIST" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="Baptist" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="Christian" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="Jehovah' Witness" & data$q49==1] <- 7
+data$reltrad[data$q50_text=="baptis" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="baptist" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="christian" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="christianity" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="holiness" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="no up for discussion" & data$q49==1] <- 9
+data$reltrad[data$q50_text=="nondenominational" & data$q49==1] <- 4
+data$reltrad[data$q50_text=="some off type of christian" & data$q49==1] <- 4
+
+#now for non-Blacks 
+
+data$reltrad[data$q50_text=="AMERICAN" & data$q49>1] <- 9
+data$reltrad[data$q50_text=="APOSTOLIC" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Anamist" & data$q49>1] <- 8
+data$reltrad[data$q50_text=="BAPTIST" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Baha'i" & data$q49>1] <- 8
+data$reltrad[data$q50_text=="Baptist" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Baptist/Christian" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Buddhist" & data$q49>1] <- 8
+data$reltrad[data$q50_text=="Christian" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Christian/Pentecostal" & data$q49>1] <- 2
+data$reltrad[data$q50_text=="Deist" & data$q49>1] <- 9
+data$reltrad[data$q50_text=="Episcopalian" & data$q49>1] <- 1
+data$reltrad[data$q50_text=="Follower of Jesus" & data$q49>1] <- 9
+data$reltrad[data$q50_text=="HINDU" & data$q49>1] <- 8
+data$reltrad[data$q50_text=="Hindu" & data$q49>1] <- 8
+data$reltrad[data$q50_text=="Humanist" & data$q49>1] <- 10
+
+data$reltrad[data$q50_text=="believe in the faith not the institut" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="Independent" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="Islamism" & data$q49>1]  <- 6 
+data$reltrad[data$q50_text=="JW" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="Jehovah' Witness" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="Jehovah's Witness" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="Jewish/Catholic" & data$q49>1]  <- 5 
+data$reltrad[data$q50_text=="Just Christian" & data$q49>1]  <- 9 
+data$reltrad[data$q50_text=="LDS" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="LDS (mormon)" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="Luthern" & data$q49>1] <- 1 
+data$reltrad[data$q50_text=="Mennanite" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="Methodist" & data$q49>1]  <- 1 
+data$reltrad[data$q50_text=="Mormon" & data$q49>1]  <- 7 
+data$reltrad[data$q50_text=="Native Am. traditions" & data$q49>1]  <- 8 
+data$reltrad[data$q50_text=="Non denominational" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="Nondenominational" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="Pagan" & data$q49>1]  <- 8 
+data$reltrad[data$q50_text=="Pastafarian" & data$q49>1]  <- 8 
+data$reltrad[data$q50_text=="Penacastal" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="Pentecostal" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="Presbytarian" & data$q49>1]  <- 1 
+data$reltrad[data$q50_text=="Religious Science" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="Saved" & data$q49>1]  <- 9 
+data$reltrad[data$q50_text=="Spiritual" & data$q49>1]  <- 9 
+data$reltrad[data$q50_text=="Spiritual not religious" & data$q49>1]  <- 9 
+data$reltrad[data$q50_text=="Sprital" & data$q49>1]  <- 9 
+data$reltrad[data$q50_text=="Taoist" & data$q49>1]  <- 8 
+data$reltrad[data$q50_text=="Testigo de Jehova" & data$q49>1] <- 7 
+data$reltrad[data$q50_text=="UNITARIAN-UNIVERSALIST" & data$q49>1] <- 1 
+data$reltrad[data$q50_text=="Unitarian Universalist" & data$q49>1] <- 1 
+data$reltrad[data$q50_text=="Wicca" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="Wiccan" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="apolstolic" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="babtist" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="bapist" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="bapstist" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="baptis" & data$q49>1]  <- 2 
+data$reltrad[data$q50_text=="baptist" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="bhuddist" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="buddha" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="buddhist" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="christian" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="christian identity" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="christianity" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="episcopailion" & data$q49>1] <- 1 
+data$reltrad[data$q50_text=="fundamental christian" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="hindu" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="holiness" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="indenpent baptist" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="mormon" & data$q49>1] <- 7 
+data$reltrad[data$q50_text=="new age" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="no up for discussion" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="nondenominational" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="nondenominational Bible believer" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="none" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="penecostal" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="pentecostal/nondenomination" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="sikh" & data$q49>1] <- 8 
+data$reltrad[data$q50_text=="some off type of christian" & data$q49>1] <- 2 
+data$reltrad[data$q50_text=="spiritual" & data$q49>1] <- 9 
+data$reltrad[data$q50_text=="spiritual, not religious" & data$q49>1] <- 9
+data$reltrad[data$q50_text=="spiritualist" & data$q49>1] <- 9
+data$reltrad[data$q50_text=="spirituality" & data$q49>1] <- 9
+
+#label reltrad values
+data$reltrad <- factor(data$reltrad,
+                       levels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                       labels = c("Mainline", "Evangelical", "Catholic", "Black Prot.", "Jewish",
+                                  "Muslim", "Amer. Christian", "Non-Christian", "Rel. Nones",
+                                  "Atheist"))
+
+#Now making dummies.
+#reltrad - 1=mainline, 2=evangelical, 3=catholic, 4=black protestant, 5=Jewish, 6=Muslim, 7=American 
+#Christian (LDS and JWs), 8=Other, Non Christian, 9=Nothing institutional (religious nones), 10=Atheist/Agnostic
+data$mainline <- as.numeric(as.numeric(data$reltrad)==1)
+data$evangelical <- as.numeric(as.numeric(data$reltrad)==2)
+data$catholic <- as.numeric(as.numeric(data$reltrad)==3)
+data$blackProtestant <- as.numeric(as.numeric(data$reltrad)==4)
+data$rt_j <- as.numeric(as.numeric(data$reltrad)==5)
+data$rt_m <- as.numeric(as.numeric(data$reltrad)==6)
+data$rt_ac <- as.numeric(as.numeric(data$reltrad)==7)
+data$rt_nc <- as.numeric(as.numeric(data$reltrad)==8)
+data$rt_ni <- as.numeric(as.numeric(data$reltrad)==9)
+data$rt_aa <- as.numeric(as.numeric(data$reltrad)==10)
+
+data$other <- 1
+data$other[as.numeric(data$reltrad) < 5] <- 0
+data$other[as.numeric(data$reltrad) >= 5] <- 1
+
+```
+
+```{r echo = FALSE}
+##DEPENDENT VARIABLES
+
+#Apostasy, not attending the same church as 6 months ago
+data$apostasy <- as.numeric(data$w88 == 2)
+data$apostasy[data$w88 == 3] <- NA
+
+#Attendance, wave 2
+data$attendw2 <- data$w52
+
+data$attendw1 <- factor(data$attendw1, order = TRUE,
+                       levels = c(1, 2, 3, 4, 5, 6, 7),
+                       labels = c("Never", "<1x Month", "1x Month", "2-3x a Month", "1x Week", 
+                       "2-3x Week", "Daily"))
+
+data$attendw2 <- factor(data$attendw2, order = TRUE,
+                       levels = c(1, 2, 3, 4, 5, 6, 7),
+                       labels = c("Never", "<1x Month", "1x Month", "2-3x a Month", "1x Week", 
+                       "2-3x Week", "Daily"))
+
+
+```
+
+**Replication of Results**
+
+My replication of Djupe et. al.'s results was succesful. I first replicated the part of a table (TABLE 1) which displayed the percentage of respondents to the 2012 surveys who indicated that they perceived various differences between themselves and their congregation. I then replicated the two regression functions which Djupe et. al. produced, one of which relates the likelihood of church attendance at different frequencies to variables measured in the first survey, and the other of which relates the likelihood of disaffiliation to variables measured in the first survey, one of which is an index of perceived partisan difference with the congregation. The results are displayed below.
+
+***Percent Differences with their Congregation Reported by Respondents***
+
+```{r echo=FALSE}
+m1<-100*mean(data$wrd1c, na.rm = TRUE)
+m2<-100*mean(data$wrd2c, na.rm = TRUE)
+m3<-100*mean(data$wrd3c, na.rm = TRUE)
+m4<-100*mean(data$wrd4c, na.rm = TRUE)
+m5<-100*mean(data$wrd5c, na.rm = TRUE)
+m6<-100*mean(data$wrd6c, na.rm = TRUE)
+m7<-100*mean(data$wrd7c, na.rm = TRUE)
+
+summaryData <- data.frame(Differences=character(7),
+                 Percent=numeric(7)) 
+
+summaryData$Differences <- c("Overall Political Opinions", "Level of Interest in Politics", "Age", "Income and Social Class", "Education Level", "Race/Ethnicity", "Religious Beliefs")
+summaryData$Percent <- (c(m1, m2, m3, m4, m5, m7, m6))
+
+kable(summaryData, caption = "The Prevalence of Reported Differences from Other Church Members")
+
+
+
+```
+
+
+***Predicting Worship Attendance and Disaffiliation***
+
+```{r echo=FALSE, results = 'hide'}
+
+#Table 2 – Predicting Worship Attendance and Disaffiliation by Perceived (Partisan) Difference with the Congregation (2012)
+
+attendanceW2 <- polr(data=data[data$w88==1,], formula = attendw2 ~ as.numeric(attendw1)*wrdt1c + politicalInterest +
+                      net_churchc + ideology*christianFundamentalism + female + income + education + age + mainline + catholic +
+                      blackProtestant + other, Hess = TRUE, model = TRUE)
+apostasyData <- data[!is.na(data$apostasy),]
+apostasy <- glm(apostasy ~ partisanDifference*as.numeric(attendw1) + politicalInterest + net_churchc + ideology*christianFundamentalism +
+                female + income + education + age + mainline + catholic + blackProtestant + other,
+                family = binomial(link = "logit"), data = apostasyData)
+
+stargazer(attendanceW2, apostasy, style = 'AJPS', single.row = TRUE,
+          title            = "Worship Attendance and Disaffiliation",
+          covariate.labels = c("Partisan Difference with Congregation", "Attendance, Wave 1", "Differences Index",
+                               "Political Interest", "Church Discussant", "Ideology", "Feelings toward Christian Fundamentalists",
+                               "Female", "Income", "Education", "Age", "Mainline Protestant", "Catholic", "Black Protestant", "Other Religion",
+                               "Attendance X Differences", "Attendance X Partisan Difference", "Ideology X Fundamentalists"),
+          dep.var.labels   = c("Attendance, Wave 2", "Disaffiliation"),
+          report = "vc*p",
+          model.names = FALSE,
+          initial.zero = FALSE)
+
+```
+\begin{table}[!htbp] \centering 
+  \caption{Worship Attendance and Disaffiliation} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline \\[-1.8ex] 
+\\[-1.8ex] & \textbf{Attendance, Wave 2} & \textbf{Disaffiliation} \\ 
+\\[-1.8ex] & \textbf{Model 1} & \textbf{Model 2}\\ 
+\hline \\[-1.8ex] 
+ Partisan Difference with Congregation &  & .685$^{**}$ \\ 
+  &  & p = .026 \\ 
+  Attendance, Wave 1 & 1.603$^{***}$ & $-$.226 \\ 
+  & p = 0.00000 & p = .181 \\ 
+  Differences Index & $-$2.925 &  \\ 
+  & p = .160 &  \\ 
+  Political Interest & .045 & $-$.145 \\ 
+  & p = .641 & p = .305 \\ 
+  Church Discussant & $-$.146 & .054 \\ 
+  & p = .527 & p = .887 \\ 
+  Ideology & $-$.190 & .007 \\ 
+  & p = .320 & p = .981 \\ 
+  Feelings toward Christian Fundamentalists & $-$.516 & .680 \\ 
+  & p = .566 & p = .640 \\ 
+  Female & $-$.068 & $-$.085 \\ 
+  & p = .753 & p = .792 \\ 
+  Income & .072 & $-$.125 \\ 
+  & p = .295 & p = .209 \\ 
+  Education & $-$.211$^{*}$ & $-$.059 \\ 
+  & p = .069 & p = .733 \\ 
+  Age & $-$.012 & $-$.035$^{***}$ \\ 
+  & p = .120 & p = .005 \\ 
+  Mainline Protestant & $-$.389 & .158 \\ 
+  & p = .205 & p = .757 \\ 
+  Catholic & $-$.554$^{*}$ & .250 \\ 
+  & p = .067 & p = .609 \\ 
+  Black Protestant & $-$.249 & .341 \\ 
+  & p = .543 & p = .598 \\ 
+  Other Religion & .425 & .855 \\ 
+  & p = .282 & p = .119 \\ 
+  Attendance X Differences & .524 &  \\ 
+  & p = .265 &  \\ 
+  Attendance X Partisan Difference &  & $-$.132 \\ 
+  &  & p = .109 \\ 
+  Ideology X Fundamentalists & .206 & .134 \\ 
+  & p = .490 & p = .765 \\ 
+  Constant &  & .402 \\ 
+  &  & p = .788 \\ 
+ N & 414 & 441 \\ 
+Log Likelihood &  & $-$147.812 \\ 
+AIC &  & 329.625 \\ 
+\hline \\[-1.8ex] 
+\multicolumn{3}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
+\end{tabular} 
+\end{table} 
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{articleTable.png}
+  \caption{Reproduced from the Article}
+  \label{fig:boat1}
+\end{figure}
+
+
+As can be seen, Djupe et. al. found that attendance in the first wave was the only significant predictor of attendance during the second wave and that age and partisan difference were the only statistically significant predictors of disaffiliation by the time of the second wave. This result regarding the connection between perceived political difference with one's congregation and disaffiliation lends support to Djupe et. al.'s hypothesis that evaluation of political fit in one's congregation affect disaffiliation decisions.
+
+Since the model used by Djupe et. al. for the regression on disffiliation is the model I will be modifying for my extension, I will present it here:
+
+\begin{equation}
+\begin{aligned}
+  \mathrm{logOdds}(Disaffiliation) = \beta_0 + \beta_1(Partisan Difference) + \beta_2(Wave 1 Attendance) + \\
+  \beta_3(Political Interest) + \beta_4(Church Discussant) + \beta_5(Ideology) + \\
+  \beta_6(Feelings towards Christian Fundamentalists) + \beta_7(Female) + \beta_8(Income) + \beta_9(Education) + \\
+  \beta_{10}(Age) + \beta_{11}(Mainline Protestant) + \beta_{12}(Catholic) + \beta_{13}(Black Protestant) + \\
+  \beta_{14}(Other Religion) + \beta_{15}(Wave 1 Attendance X Partisan Difference) +\\
+  \beta_{16}(Ideology X Feelings toward Christian Fundamentalists) + \epsilon
+\end{aligned}
+\end{equation}
+
+
+**Evaluation**
+
+I present below the results of various diagnostic tests for the Disaffilation regression along with a new regression for the same model run on data that has been pared of observations which have DFBETAS above the cutoff level. I do not include diagnostics for the Attendance regression since I will not be using it in my extension and since it is an ordered logit model.
+
+***Disaffiliation Residuals Plots***
+
+```{r echo=FALSE}
+
+#Apostasy Residuals Plots
+
+
+resfitted <- as.data.frame(cbind(fitted(apostasy), apostasy$model[, 2], residuals(apostasy, "pearson") ))
+
+ggplot(data = resfitted, aes(x=V2, y=V3)) + 
+  geom_point() +
+  ggtitle("Pearson Residuals against Partisan Difference with Congregation")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Partisan Difference', y='Deviance Residuals')
+
+apostasy$model$attendw1 <- apostasy$model[,3]
+apostasy$model$residuals <- residuals(apostasy, 'pearson')
+apostasy$model$predicted <- predict(apostasy)
+
+ggplot(apostasy$model, aes(x=predicted , y=residuals )) + 
+  geom_point() +
+  ggtitle("Pearson Residuals on Predicted Values")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+ggplot(apostasy$model, aes(x=attendw1 , y=residuals )) + 
+  geom_point() +
+  ggtitle("Pearson Residuals on Attendance")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(apostasy$model, aes(x=politicalInterest , y=residuals )) + 
+  geom_point() +
+  ggtitle("Pearson Residuals on Political Interest")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(apostasy$model, aes(x=age , y=residuals )) + 
+  geom_point() +
+  ggtitle("Pearson Residuals on Age")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+ggplot(apostasy$model, aes(x=income , y=residuals )) + 
+  geom_point() +
+  ggtitle("Pearson Residuals on Income")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+I have included above a few examples of plots of the pearson residuals of the regression on various independent variables. One can see that there appear with several of these variables to be heteroskedasticity problems. For example, the pearson residuals are positively correlated with age. 
+
+***Influence Points***
+
+*Disaffiliation DFBETAS*
+
+There are 19 observations for which the DFBETAS are over the usual cutoff. If we remove these observations, we get these results:
+
+```{r echo=FALSE, results = 'hide'}
+
+#Apostasy DFBETAS
+dfB <- as.data.frame(dfbetas(apostasy))
+#as.numeric(rownames(dfB[dfB[]>(2/sqrt(441)), ]))
+aDFBProb <- c(32, 33, 229, 298, 351, 429, 524, 537, 540, 626, 692, 719, 723, 761, 845, 852, 
+                       872, 918, 947)
+
+apostasy1 <- glm(apostasy ~ partisanDifference*as.numeric(attendw1) + politicalInterest + net_churchc + ideology*christianFundamentalism +
+                female + income + education + age + mainline + catholic + blackProtestant + other,
+                family = binomial(link = "logit"), data = data[-aDFBProb,])
+
+stargazer( apostasy, apostasy1, style = 'AJPS', single.row = TRUE,
+          title            = "Disaffiliation with Influence Points Removed",
+          covariate.labels = c("Partisan Difference with Congregation", "Attendance, Wave 1",
+                               "Political Interest", "Church Discussant", "Ideology", "Feelings toward Christian Fundamentalists",
+                               "Female", "Income", "Education", "Age", "Mainline Protestant", "Catholic", "Black Protestant", "Other Religion", 
+                               "Attendance X Partisan Difference", "Ideology X Fundamentalists"),
+          dep.var.labels   = c("Disaffiliation", "Disaffiliation"),
+          column.labels = c("Original", "Trimmed of Influence Points"),
+          report = "vcp*",
+          model.names = FALSE,
+          initial.zero = FALSE)
+
+```
+\begin{table}[!htbp] \centering 
+  \caption{Disaffiliation with Influence Points Removed} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline \\[-1.8ex] 
+\\[-1.8ex] & \multicolumn{2}{c}{\textbf{Disaffiliation}} \\ 
+ & \textbf{Original} & \textbf{Trimmed of Influence Points} \\ 
+\\[-1.8ex] & \textbf{Model 1} & \textbf{Model 2}\\ 
+\hline \\[-1.8ex] 
+ Partisan Difference with Congregation & .685 & 1.223 \\ 
+  & p = .026$^{**}$ & p = .002$^{***}$ \\ 
+  Attendance, Wave 1 & $-$.226 & .028 \\ 
+  & p = .181 & p = .888 \\ 
+  Political Interest & $-$.145 & .107 \\ 
+  & p = .305 & p = .532 \\ 
+  Church Discussant & .054 & $-$.101 \\ 
+  & p = .887 & p = .810 \\ 
+  Ideology & .007 & .674 \\ 
+  & p = .981 & p = .096$^{*}$ \\ 
+  Feelings toward Christian Fundamentalists & .680 & 4.215 \\ 
+  & p = .640 & p = .030$^{**}$ \\ 
+  Female & $-$.085 & .286 \\ 
+  & p = .792 & p = .440 \\ 
+  Income & $-$.125 & $-$.067 \\ 
+  & p = .209 & p = .559 \\ 
+  Education & $-$.059 & .161 \\ 
+  & p = .733 & p = .438 \\ 
+  Age & $-$.035 & $-$.034 \\ 
+  & p = .005$^{***}$ & p = .022$^{**}$ \\ 
+  Mainline Protestant & .158 & .822 \\ 
+  & p = .757 & p = .182 \\ 
+  Catholic & .250 & 1.006 \\ 
+  & p = .609 & p = .094$^{*}$ \\ 
+  Black Protestant & .341 & .983 \\ 
+  & p = .598 & p = .172 \\ 
+  Other Religion & .855 & 1.839 \\ 
+  & p = .119 & p = .006$^{***}$ \\ 
+  Attendance X Partisan Difference & $-$.132 & $-$.244 \\ 
+  & p = .109 & p = .012$^{**}$ \\ 
+  Ideology X Fundamentalists & .134 & $-$.577 \\ 
+  & p = .765 & p = .302 \\ 
+  Constant & .402 & $-$6.555 \\ 
+  & p = .788 & p = .003$^{***}$ \\ 
+ N & 441 & 422 \\ 
+Log Likelihood & $-$147.812 & $-$113.988 \\ 
+AIC & 329.625 & 261.975 \\ 
+\hline \\[-1.8ex] 
+\multicolumn{3}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
+\end{tabular} 
+\end{table} 
+
+The removal of these observations (unsurprisingly) decreases the AIC of the regression. More interesting, however, is that with their removal, the coefficients for feelings towards Christian fundamentalists and identifying as another religion become significant. Significant also is the fact that the attendance and partisan difference interaction term becomes significant.
+
+But before we can recommend that these observations with high DFBETAS be left out of the regression data, we need to examine them to see whether there is any indication that they are the result of a different data generation process. Having done such an examination, I suspect that these observations can be left out of the regression data. This is because these observations, about 70% of which disaffiliated, also had lower church attendance in wave 1 than the average of the observations used in this regression. This might suggest that these outliers are cases of disaffiliation not so much as a result of political differences as out of what we might call laziness or business, depending on the case. Of course, including these observations would be necessary if one wanted to give a complete account of the causes of disaffiliation, but if one is interested only in the political determinants of disaffiliation, then excluding them may be permissible.
+
+*Cook's Distance*
+
+I will also check to see whether any observations have a Cook's D value above the conventional cutoff. 
+
+```{r, echo=FALSE}
+
+apostasy1$model$id <- row.names(apostasy1$model)
+
+apostasy1$model$cooks <- cooks.distance(apostasy1)
+
+cookCutoff <- 4/422
+
+ggplot(apostasy1$model, aes(x=id, y=cooks)) + 
+  geom_point() +
+  geom_hline(yintercept = cookCutoff) +
+  ggtitle("Cook's Distance against Indices")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Index')
+
+```
+
+As can be seen in the plot above, there are a good number of observations with high Cook's distances. These would merit investigation. In general, this data has quite a few influence points. I wonder whether the reason is that since only 14% of the respondents disaffiliated from their churches, all of the observations with a disaffiliation value of 1 have become outliers which, if they also have even somewhat peculiar independent variable values, could become influence points. This is corroborated, though perhaps only in a small measure, by the fact that of the 42 observations for which the Cook's distance is greater than the cutoff, 39 are cases in which the respondent disaffiliated. 
+
+```{r, include=FALSE}
+
+apostasy1$model[apostasy1$model$cooks > cookCutoff, c(1 ,2, 12)]
+
+```
+
+*Studentized Residuals and Hat Values*
+
+None of the observations has both a hat value and studentized residual greater than their respective cutoffs. As was predicted above, however, the observations for which disaffiliation = 1 have greater studentized residuals than the rest of the observations.
+
+```{r, echo=FALSE}
+#studentized residuals
+apostasy1$model$student <- rstudent(apostasy1)
+
+#hat values
+apostasy1$model$hat <- hatvalues(apostasy1)
+
+hatcutoff <- 3*(8/422)
+studcutoff <- 3
+
+ggplot(apostasy1$model, aes(x=student, y=hat )) + 
+  geom_point() +
+  geom_hline(yintercept = hatcutoff) +
+  geom_vline(xintercept = -3) +
+  geom_vline(xintercept = 3) +
+  ggtitle("Hat Values against Studentized Residuals")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+***Multicollinearity***
+
+Below are presented the GVIF values for the independent variables. Several of the independent variables have values uncomfortably close to 10. However, since the effects of none of the independent variables of interest (partisan difference) were not obscured, this is likely not an issue.
+
+```{r, echo=FALSE}
+vif(apostasy)
+```
+
+**Extension**
+
+My extension consists in a modification of the model used by Djupe et. al. to estimate the effects of partisan difference and the controls on the likelihood of disaffiliation. Before I present that modification, I will explain the question I aim to answer and the theoretical background of that question. In the paper, Djupe et. al. do not only predict on the basis of their theory that perceived partisan difference with one's congregation will make one more likely to disaffiliate from one's congregation. They also (paradoxically) predict that evangical \textit{Republicans} who oppose the Christian Right will be most likely to disaffiliate from their churches, at least during the election season. Their explanation of this strange prediction is as follows. Christians of every denomination who attend a church will be likely to have sorted themselves politically to some degree. That is, Republican Catholics, mainline Protestants, and Evangelicals are all more likely to attend churches with a greater number of Republican attendees, and likewise with Christian Democrats. Since the Christian Right is the most prominent American political coalition associated with Christianity, and since politicians and political principles associated with the Christian Right will be more often endorsed in “Republican” churches, Christian Republicans who oppose the Christian Right, in distinction to Christian Democrats who oppose the Christian Right, will be more likely to encounter a politics they do not like in their churches, especially during election cycles. For this reason, Christian Republicans, and, in particular, Evangelical Republicans, in the aggregate will be more likely to disaffiliate from their churches during election cycles.
+
+The Djupe et. al. find support for this prediction in their analysis of the third dataset they use, the 2012 Portraits of American Life survery--of those surveyed, Evangelicals who are strong Republicans and oppose the Christian Right were more likely to disaffiliate from their churches than any other group. However, as they admit, this survey does not include measures of respondents' perceived partisan difference with their church. This means that Djupe et. al. are not able to confirm that the reason for the greater attrition rate on the part of Evangelical Republicans opposed to the CR was the political difference they perceived with their congregation.
+
+Using the first dataset, however, we can try to confirm this interpretation of the results of the analysis of the Portraits data and replicate those results in addition. We can do this because in addition to having variables for disaffiliation, and partisanship, we have a variable which measures "overall political differences" between a respondent and their congregation (the partisan difference variable does not suffice since this might not record the difference between a Republican CR oppenent and a congregation of Republican CR supporters). Hence we can construct the following model:
+
+\begin{equation}
+\begin{aligned}
+  \mathrm{logOdds}(Disaffiliation) = \beta_0 + \beta_1(PoliticalDifferences X Catholic) + \\
+  \beta_2(PoliticalDifferences X Mainline) + \beta_3(PoliticalDifferences X Black Protestant) + \\
+  \beta_4(Partisan Difference) + \beta_{10}(Age) + \beta_{11}(Mainline Protestant) + \beta_{12}(Catholic) + \\
+  \beta_{13}(Black Protestant) +\epsilon
+\end{aligned}
+\end{equation}
+
+The important difference between this model and the model used in the paper for disaffiliation is that this model contains three interaction terms between the \textit{non-Evangelical} denominations and Political Differences. Since Political Differences is coded such that 0 is no differences and 4 is strong differences, we expect, if Djupe et. al.'s theory is correct, that the coefficients for the denomination X partisanship interaction terms will be less than zero (since the Evangelicals, for whom we expect the effect to be greatest, are left out). Below are the results of this regression on the 2012 panel data.
+
+
+```{r echo=FALSE,results='hide'}
+
+christiandata <- data[data$other == 0,]
+
+apostasyExtension <- glm(apostasy ~ partisanDifference + wrd1*catholic + wrd1*mainline + wrd1*blackProtestant + age,
+                family = binomial(link = "logit"), data = christiandata)
+
+stargazer( apostasyExtension, style = 'AJPS',single.row = TRUE,
+          title            = "Modified Disaffiliation Model",
+          covariate.labels = c("Partisan Difference with Congregation", "Political Differences",
+                                 "Catholic", "Mainline Protestant", "Black Protestant", "Age", 
+                               "Political Differences X Catholic", "Political Differences X Mainline", "Political Differences X Black Protestant"),
+          dep.var.labels   = c("Disaffiliation", "Disaffiliation"),
+          report = "vcp*",
+          model.names = FALSE,
+          initial.zero = FALSE)
+
+```
+\begin{table}[!htbp] \centering 
+  \caption{Modified Disaffiliation Model} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline \\[-1.8ex] 
+\\[-1.8ex] & \textbf{Disaffiliation} \\ 
+\hline \\[-1.8ex] 
+ Partisan Difference with Congregation & .091 \\ 
+  & p = .552 \\ 
+  Political Differences & $-$.402 \\ 
+  & p = .344 \\ 
+  Catholic & 1.101 \\ 
+  & p = .498 \\ 
+  Mainline Protestant & .389 \\ 
+  & p = .822 \\ 
+  Black Protestant & $-$2.030 \\ 
+  & p = .515 \\ 
+  Age & $-$.048 \\ 
+  & p = .002$^{***}$ \\ 
+  Political Differences X Catholic & $-$.416 \\ 
+  & p = .505 \\ 
+  Political Differences X Mainline & $-$.107 \\ 
+  & p = .870 \\ 
+  Political Differences X Black Protestant & .939 \\ 
+  & p = .399 \\ 
+  Constant & .503 \\ 
+  & p = .711 \\ 
+ N & 376 \\ 
+Log Likelihood & $-$104.413 \\ 
+AIC & 228.825 \\ 
+\hline \\[-1.8ex] 
+\multicolumn{2}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
+\end{tabular} 
+\end{table}
+
+The results, unfortunately, are not significant. Although the signs of the coefficients are as we predicted for the interaction terms with Catholics and Mainline protestants, the sign is not what we expected for the interaction term with Black Protestants, and significance of all three coefficients is well below the standard threshold.
+
+**Conclusion**
+
+In retrospect, part, if not all, of the reason for the lack of the results is the following. I should have checked to see whether the claim that worshipers politically sort and do so to the same extent irrespective of partisan leaning is sound. Below is a plot of perceived partisan difference with one's congregation on partisanship. Partisanship is coded such that a strong Democrat is a 0 and a strong Republican is a 7.
+
+```{r, echo=FALSE}
+
+ggplot(data, aes(x=pid7 , y=partisanDifference )) + 
+  geom_point() +
+  ggtitle("Partisan Difference on Partisanship")+
+  labs(x='Partisanship', y='Partisan Difference')+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+Although, as we would expect, strong Democrats and strong Republicans both seem to find themselves in congregations with fellow worshipers who differ more than those of moderate partisans, it seems that Democrats more often than Republicans find themselves in congregations with others who have different partisan positions. Moreover, Partsan Difference is significantly correlated with Political Difference, as can be seen in the small correlation table below.
+
+```{r, echo=FALSE}
+
+#corstars function code taken from http://myowelt.blogspot.com/2008/04/beautiful-correlation-tables-in-r.html
+
+corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
+                     result=c("none", "html", "latex")){
+    #Compute correlation matrix
+    require(Hmisc)
+    x <- as.matrix(x)
+    correlation_matrix<-rcorr(x, type=method[1])
+    R <- correlation_matrix$r # Matrix of correlation coeficients
+    p <- correlation_matrix$P # Matrix of p-value 
+    
+    ## Define notions for significance levels; spacing is important.
+    mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "**  ", ifelse(p < .05, "*   ", "    "))))
+    
+    ## trunctuate the correlation matrix to two decimal
+    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+    
+    ## build a new matrix that includes the correlations with their apropriate stars
+    Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
+    diag(Rnew) <- paste(diag(R), " ", sep="")
+    rownames(Rnew) <- colnames(x)
+    colnames(Rnew) <- paste(colnames(x), "", sep="")
+    
+    ## remove upper triangle of correlation matrix
+    if(removeTriangle[1]=="upper"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove lower triangle of correlation matrix
+    else if(removeTriangle[1]=="lower"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove last column and return the correlation matrix
+    Rnew <- cbind(Rnew[1:length(Rnew)-1])
+    if (result[1]=="none") return(Rnew)
+    else{
+      if(result[1]=="html") print(xtable(Rnew), type="html")
+      else print(xtable(Rnew), type="latex") 
+    }
+} 
+corData <- data[!is.na(data[,26]), c(26,42)]
+corData$partisanship <- corData$wrd1
+corData$politicaldifference <- corData$pid7
+corstars(corData[,c(3,4)])
+```
+
+The effect of all this is that 1) Political Differences cannot by any means be understood to capture only difference in support of the Christian Right since Political Differences also captures Partisan Difference, which is felt more by Democrats than by Republicans. Hence the model provided above is not sufficient to test the hypothesis that Evangelical Republicans are more likely to leave their congregations on account of tension over support for the Christian Right. What would be needed to test this hypothesis is data which measures Christian Denomination, Partisanship, Disaffiliation, and Difference within one's congregation on support for the Christian Right.
+
+
+
