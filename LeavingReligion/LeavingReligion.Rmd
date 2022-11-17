@@ -41,6 +41,7 @@ library(haven)
 library(texreg)
 library(psych)
 library(ggplot2)
+library(gridExtra)
 library(arm)
 library(knitr)
 library(pryr)
@@ -332,68 +333,57 @@ stargazer(attendanceW2, apostasy, style = 'AJPS', single.row = TRUE,
           dep.var.labels   = c("Attendance, Wave 2", "Disaffiliation"),
           report = "vc*p",
           model.names = FALSE,
-          initial.zero = FALSE)
+          initial.zero = FALSE,
+          type='html')
 
 ```
-\begin{table}[!htbp] \centering 
-  \caption{Worship Attendance and Disaffiliation} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcc} 
-\\[-1.8ex]\hline \\[-1.8ex] 
-\\[-1.8ex] & \textbf{Attendance, Wave 2} & \textbf{Disaffiliation} \\ 
-\\[-1.8ex] & \textbf{Model 1} & \textbf{Model 2}\\ 
-\hline \\[-1.8ex] 
- Partisan Difference with Congregation &  & .685$^{**}$ \\ 
-  &  & p = .026 \\ 
-  Attendance, Wave 1 & 1.603$^{***}$ & $-$.226 \\ 
-  & p = 0.00000 & p = .181 \\ 
-  Differences Index & $-$2.925 &  \\ 
-  & p = .160 &  \\ 
-  Political Interest & .045 & $-$.145 \\ 
-  & p = .641 & p = .305 \\ 
-  Church Discussant & $-$.146 & .054 \\ 
-  & p = .527 & p = .887 \\ 
-  Ideology & $-$.190 & .007 \\ 
-  & p = .320 & p = .981 \\ 
-  Feelings toward Christian Fundamentalists & $-$.516 & .680 \\ 
-  & p = .566 & p = .640 \\ 
-  Female & $-$.068 & $-$.085 \\ 
-  & p = .753 & p = .792 \\ 
-  Income & .072 & $-$.125 \\ 
-  & p = .295 & p = .209 \\ 
-  Education & $-$.211$^{*}$ & $-$.059 \\ 
-  & p = .069 & p = .733 \\ 
-  Age & $-$.012 & $-$.035$^{***}$ \\ 
-  & p = .120 & p = .005 \\ 
-  Mainline Protestant & $-$.389 & .158 \\ 
-  & p = .205 & p = .757 \\ 
-  Catholic & $-$.554$^{*}$ & .250 \\ 
-  & p = .067 & p = .609 \\ 
-  Black Protestant & $-$.249 & .341 \\ 
-  & p = .543 & p = .598 \\ 
-  Other Religion & .425 & .855 \\ 
-  & p = .282 & p = .119 \\ 
-  Attendance X Differences & .524 &  \\ 
-  & p = .265 &  \\ 
-  Attendance X Partisan Difference &  & $-$.132 \\ 
-  &  & p = .109 \\ 
-  Ideology X Fundamentalists & .206 & .134 \\ 
-  & p = .490 & p = .765 \\ 
-  Constant &  & .402 \\ 
-  &  & p = .788 \\ 
- N & 414 & 441 \\ 
-Log Likelihood &  & $-$147.812 \\ 
-AIC &  & 329.625 \\ 
-\hline \\[-1.8ex] 
-\multicolumn{3}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
-\end{tabular} 
-\end{table} 
 
-\begin{figure}
-  \includegraphics[width=\linewidth]{articleTable.png}
-  \caption{Reproduced from the Article}
-  \label{fig:boat1}
-\end{figure}
+<table style="text-align:center"><caption><strong>Worship Attendance and Disaffiliation</strong></caption>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><strong>Attendance, Wave 2</strong></td><td><strong>Disaffiliation</strong></td></tr>
+<tr><td style="text-align:left"></td><td><strong>Model 1</strong></td><td><strong>Model 2</strong></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Partisan Difference with Congregation</td><td></td><td>.685<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>p = .026</td></tr>
+<tr><td style="text-align:left">Attendance, Wave 1</td><td>1.603<sup>***</sup></td><td>-.226</td></tr>
+<tr><td style="text-align:left"></td><td>p = 0.00000</td><td>p = .181</td></tr>
+<tr><td style="text-align:left">Differences Index</td><td>-2.925</td><td></td></tr>
+<tr><td style="text-align:left"></td><td>p = .160</td><td></td></tr>
+<tr><td style="text-align:left">Political Interest</td><td>.045</td><td>-.145</td></tr>
+<tr><td style="text-align:left"></td><td>p = .641</td><td>p = .305</td></tr>
+<tr><td style="text-align:left">Church Discussant</td><td>-.146</td><td>.054</td></tr>
+<tr><td style="text-align:left"></td><td>p = .527</td><td>p = .887</td></tr>
+<tr><td style="text-align:left">Ideology</td><td>-.190</td><td>.007</td></tr>
+<tr><td style="text-align:left"></td><td>p = .320</td><td>p = .981</td></tr>
+<tr><td style="text-align:left">Feelings toward Christian Fundamentalists</td><td>-.516</td><td>.680</td></tr>
+<tr><td style="text-align:left"></td><td>p = .566</td><td>p = .640</td></tr>
+<tr><td style="text-align:left">Female</td><td>-.068</td><td>-.085</td></tr>
+<tr><td style="text-align:left"></td><td>p = .753</td><td>p = .792</td></tr>
+<tr><td style="text-align:left">Income</td><td>.072</td><td>-.125</td></tr>
+<tr><td style="text-align:left"></td><td>p = .295</td><td>p = .209</td></tr>
+<tr><td style="text-align:left">Education</td><td>-.211<sup>*</sup></td><td>-.059</td></tr>
+<tr><td style="text-align:left"></td><td>p = .069</td><td>p = .733</td></tr>
+<tr><td style="text-align:left">Age</td><td>-.012</td><td>-.035<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>p = .120</td><td>p = .005</td></tr>
+<tr><td style="text-align:left">Mainline Protestant</td><td>-.389</td><td>.158</td></tr>
+<tr><td style="text-align:left"></td><td>p = .205</td><td>p = .757</td></tr>
+<tr><td style="text-align:left">Catholic</td><td>-.554<sup>*</sup></td><td>.250</td></tr>
+<tr><td style="text-align:left"></td><td>p = .067</td><td>p = .609</td></tr>
+<tr><td style="text-align:left">Black Protestant</td><td>-.249</td><td>.341</td></tr>
+<tr><td style="text-align:left"></td><td>p = .543</td><td>p = .598</td></tr>
+<tr><td style="text-align:left">Other Religion</td><td>.425</td><td>.855</td></tr>
+<tr><td style="text-align:left"></td><td>p = .282</td><td>p = .119</td></tr>
+<tr><td style="text-align:left">Attendance X Differences</td><td>.524</td><td></td></tr>
+<tr><td style="text-align:left"></td><td>p = .265</td><td></td></tr>
+<tr><td style="text-align:left">Attendance X Partisan Difference</td><td></td><td>-.132</td></tr>
+<tr><td style="text-align:left"></td><td></td><td>p = .109</td></tr>
+<tr><td style="text-align:left">Ideology X Fundamentalists</td><td>.206</td><td>.134</td></tr>
+<tr><td style="text-align:left"></td><td>p = .490</td><td>p = .765</td></tr>
+<tr><td style="text-align:left">Constant</td><td></td><td>.402</td></tr>
+<tr><td style="text-align:left"></td><td></td><td>p = .788</td></tr>
+<tr><td style="text-align:left">N</td><td>414</td><td>441</td></tr>
+<tr><td style="text-align:left">Log Likelihood</td><td></td><td>-147.812</td></tr>
+<tr><td style="text-align:left">AIC</td><td></td><td>329.625</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="3" style="text-align:left"><sup>***</sup>p < .01; <sup>**</sup>p < .05; <sup>*</sup>p < .1</td></tr>
+</table>
 
 
 As can be seen, Djupe et. al. found that attendance in the first wave was the only significant predictor of attendance during the second wave and that age and partisan difference were the only statistically significant predictors of disaffiliation by the time of the second wave. This result regarding the connection between perceived political difference with one's congregation and disaffiliation lends support to Djupe et. al.'s hypothesis that evaluation of political fit in one's congregation affect disaffiliation decisions.
@@ -425,42 +415,49 @@ I present below the results of various diagnostic tests for the Disaffilation re
 
 resfitted <- as.data.frame(cbind(fitted(apostasy), apostasy$model[, 2], residuals(apostasy, "pearson") ))
 
-ggplot(data = resfitted, aes(x=V2, y=V3)) + 
-  geom_point() +
-  ggtitle("Pearson Residuals against Partisan Difference with Congregation")+
+p1 <- ggplot(data = resfitted, aes(x=V2, y=V3)) + 
+  geom_point(size=.5) +
+  #ggtitle("Pearson Residuals against Partisan Difference with Congregation")+
   theme(plot.title = element_text(hjust = 0.5))+
-  labs(x='Partisan Difference', y='Deviance Residuals')
+  labs(x='Partisan Difference', y='Res')
 
 apostasy$model$attendw1 <- apostasy$model[,3]
 apostasy$model$residuals <- residuals(apostasy, 'pearson')
 apostasy$model$predicted <- predict(apostasy)
 
-ggplot(apostasy$model, aes(x=predicted , y=residuals )) + 
-  geom_point() +
-  ggtitle("Pearson Residuals on Predicted Values")+
-  theme(plot.title = element_text(hjust = 0.5))
+p2 <- ggplot(apostasy$model, aes(x=predicted , y=residuals )) + 
+  geom_point(size=.5) +
+  #ggtitle("Pearson Residuals on Predicted Values")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Prediction', y='Res')
 
 
-ggplot(apostasy$model, aes(x=attendw1 , y=residuals )) + 
-  geom_point() +
-  ggtitle("Pearson Residuals on Attendance")+
-  theme(plot.title = element_text(hjust = 0.5))
+p3 <- ggplot(apostasy$model, aes(x=attendw1 , y=residuals )) + 
+  geom_jitter(size=.5, position=position_jitter(0.1)) +
+  #ggtitle("Pearson Residuals on Attendance")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Attendance', y='Res')
 
-ggplot(apostasy$model, aes(x=politicalInterest , y=residuals )) + 
-  geom_point() +
-  ggtitle("Pearson Residuals on Political Interest")+
-  theme(plot.title = element_text(hjust = 0.5))
+p4 <- ggplot(apostasy$model, aes(x=politicalInterest , y=residuals )) + 
+  geom_jitter(size=.5, position=position_jitter(0.1))+
+  #ggtitle("Pearson Residuals on Political Interest")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Political Interest', y='Res')
 
-ggplot(apostasy$model, aes(x=age , y=residuals )) + 
-  geom_point() +
-  ggtitle("Pearson Residuals on Age")+
-  theme(plot.title = element_text(hjust = 0.5))
+p5 <- ggplot(apostasy$model, aes(x=age , y=residuals )) + 
+  geom_point(size=.5) +
+  #ggtitle("Pearson Residuals on Age")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Age', y='Res')
 
 
-ggplot(apostasy$model, aes(x=income , y=residuals )) + 
-  geom_point() +
-  ggtitle("Pearson Residuals on Income")+
-  theme(plot.title = element_text(hjust = 0.5))
+p6 <- ggplot(apostasy$model, aes(x=income , y=residuals )) + 
+  geom_jitter(size=.5, position=position_jitter(0.1))+
+  #ggtitle("Pearson Residuals on Income")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(x='Income', y='Res')
+
+grid.arrange(p1, p2, p3, p4, p5, p6, nrow = 3, ncol = 2, heights=c(5,5, 5))
 
 ```
 
@@ -494,59 +491,53 @@ stargazer( apostasy, apostasy1, style = 'AJPS', single.row = TRUE,
           column.labels = c("Original", "Trimmed of Influence Points"),
           report = "vcp*",
           model.names = FALSE,
-          initial.zero = FALSE)
+          initial.zero = FALSE,
+          type='html')
 
-```
-\begin{table}[!htbp] \centering 
-  \caption{Disaffiliation with Influence Points Removed} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcc} 
-\\[-1.8ex]\hline \\[-1.8ex] 
-\\[-1.8ex] & \multicolumn{2}{c}{\textbf{Disaffiliation}} \\ 
- & \textbf{Original} & \textbf{Trimmed of Influence Points} \\ 
-\\[-1.8ex] & \textbf{Model 1} & \textbf{Model 2}\\ 
-\hline \\[-1.8ex] 
- Partisan Difference with Congregation & .685 & 1.223 \\ 
-  & p = .026$^{**}$ & p = .002$^{***}$ \\ 
-  Attendance, Wave 1 & $-$.226 & .028 \\ 
-  & p = .181 & p = .888 \\ 
-  Political Interest & $-$.145 & .107 \\ 
-  & p = .305 & p = .532 \\ 
-  Church Discussant & .054 & $-$.101 \\ 
-  & p = .887 & p = .810 \\ 
-  Ideology & .007 & .674 \\ 
-  & p = .981 & p = .096$^{*}$ \\ 
-  Feelings toward Christian Fundamentalists & .680 & 4.215 \\ 
-  & p = .640 & p = .030$^{**}$ \\ 
-  Female & $-$.085 & .286 \\ 
-  & p = .792 & p = .440 \\ 
-  Income & $-$.125 & $-$.067 \\ 
-  & p = .209 & p = .559 \\ 
-  Education & $-$.059 & .161 \\ 
-  & p = .733 & p = .438 \\ 
-  Age & $-$.035 & $-$.034 \\ 
-  & p = .005$^{***}$ & p = .022$^{**}$ \\ 
-  Mainline Protestant & .158 & .822 \\ 
-  & p = .757 & p = .182 \\ 
-  Catholic & .250 & 1.006 \\ 
-  & p = .609 & p = .094$^{*}$ \\ 
-  Black Protestant & .341 & .983 \\ 
-  & p = .598 & p = .172 \\ 
-  Other Religion & .855 & 1.839 \\ 
-  & p = .119 & p = .006$^{***}$ \\ 
-  Attendance X Partisan Difference & $-$.132 & $-$.244 \\ 
-  & p = .109 & p = .012$^{**}$ \\ 
-  Ideology X Fundamentalists & .134 & $-$.577 \\ 
-  & p = .765 & p = .302 \\ 
-  Constant & .402 & $-$6.555 \\ 
-  & p = .788 & p = .003$^{***}$ \\ 
- N & 441 & 422 \\ 
-Log Likelihood & $-$147.812 & $-$113.988 \\ 
-AIC & 329.625 & 261.975 \\ 
-\hline \\[-1.8ex] 
-\multicolumn{3}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
-\end{tabular} 
-\end{table} 
+````
+<table style="text-align:center"><caption><strong>Disaffiliation with Influence Points Removed</strong></caption>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><strong>Disaffiliation</strong></td></tr>
+<tr><td style="text-align:left"></td><td><strong>Original</strong></td><td><strong>Trimmed of Influence Points</strong></td></tr>
+<tr><td style="text-align:left"></td><td><strong>Model 1</strong></td><td><strong>Model 2</strong></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Partisan Difference with Congregation</td><td>.685</td><td>1.223</td></tr>
+<tr><td style="text-align:left"></td><td>p = .026<sup>**</sup></td><td>p = .002<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Attendance, Wave 1</td><td>-.226</td><td>.028</td></tr>
+<tr><td style="text-align:left"></td><td>p = .181</td><td>p = .888</td></tr>
+<tr><td style="text-align:left">Political Interest</td><td>-.145</td><td>.107</td></tr>
+<tr><td style="text-align:left"></td><td>p = .305</td><td>p = .532</td></tr>
+<tr><td style="text-align:left">Church Discussant</td><td>.054</td><td>-.101</td></tr>
+<tr><td style="text-align:left"></td><td>p = .887</td><td>p = .810</td></tr>
+<tr><td style="text-align:left">Ideology</td><td>.007</td><td>.674</td></tr>
+<tr><td style="text-align:left"></td><td>p = .981</td><td>p = .096<sup>*</sup></td></tr>
+<tr><td style="text-align:left">Feelings toward Christian Fundamentalists</td><td>.680</td><td>4.215</td></tr>
+<tr><td style="text-align:left"></td><td>p = .640</td><td>p = .030<sup>**</sup></td></tr>
+<tr><td style="text-align:left">Female</td><td>-.085</td><td>.286</td></tr>
+<tr><td style="text-align:left"></td><td>p = .792</td><td>p = .440</td></tr>
+<tr><td style="text-align:left">Income</td><td>-.125</td><td>-.067</td></tr>
+<tr><td style="text-align:left"></td><td>p = .209</td><td>p = .559</td></tr>
+<tr><td style="text-align:left">Education</td><td>-.059</td><td>.161</td></tr>
+<tr><td style="text-align:left"></td><td>p = .733</td><td>p = .438</td></tr>
+<tr><td style="text-align:left">Age</td><td>-.035</td><td>-.034</td></tr>
+<tr><td style="text-align:left"></td><td>p = .005<sup>***</sup></td><td>p = .022<sup>**</sup></td></tr>
+<tr><td style="text-align:left">Mainline Protestant</td><td>.158</td><td>.822</td></tr>
+<tr><td style="text-align:left"></td><td>p = .757</td><td>p = .182</td></tr>
+<tr><td style="text-align:left">Catholic</td><td>.250</td><td>1.006</td></tr>
+<tr><td style="text-align:left"></td><td>p = .609</td><td>p = .094<sup>*</sup></td></tr>
+<tr><td style="text-align:left">Black Protestant</td><td>.341</td><td>.983</td></tr>
+<tr><td style="text-align:left"></td><td>p = .598</td><td>p = .172</td></tr>
+<tr><td style="text-align:left">Other Religion</td><td>.855</td><td>1.839</td></tr>
+<tr><td style="text-align:left"></td><td>p = .119</td><td>p = .006<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Attendance X Partisan Difference</td><td>-.132</td><td>-.244</td></tr>
+<tr><td style="text-align:left"></td><td>p = .109</td><td>p = .012<sup>**</sup></td></tr>
+<tr><td style="text-align:left">Ideology X Fundamentalists</td><td>.134</td><td>-.577</td></tr>
+<tr><td style="text-align:left"></td><td>p = .765</td><td>p = .302</td></tr>
+<tr><td style="text-align:left">Constant</td><td>.402</td><td>-6.555</td></tr>
+<tr><td style="text-align:left"></td><td>p = .788</td><td>p = .003<sup>***</sup></td></tr>
+<tr><td style="text-align:left">N</td><td>441</td><td>422</td></tr>
+<tr><td style="text-align:left">Log Likelihood</td><td>-147.812</td><td>-113.988</td></tr>
+<tr><td style="text-align:left">AIC</td><td>329.625</td><td>261.975</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="3" style="text-align:left"><sup>***</sup>p < .01; <sup>**</sup>p < .05; <sup>*</sup>p < .1</td></tr>
+</table>
 
 The removal of these observations (unsurprisingly) decreases the AIC of the regression. More interesting, however, is that with their removal, the coefficients for feelings towards Christian fundamentalists and identifying as another religion become significant. Significant also is the fact that the attendance and partisan difference interaction term becomes significant.
 
@@ -564,12 +555,12 @@ apostasy1$model$cooks <- cooks.distance(apostasy1)
 
 cookCutoff <- 4/422
 
-ggplot(apostasy1$model, aes(x=id, y=cooks)) + 
-  geom_point() +
-  geom_hline(yintercept = cookCutoff) +
-  ggtitle("Cook's Distance against Indices")+
+ggplot(apostasy1$model, aes(x=cooks)) + 
+  geom_histogram(binwidth=.001) +
+  geom_vline(xintercept = cookCutoff) +
+  ggtitle("Cook's Distance Distribution")+
   theme(plot.title = element_text(hjust = 0.5))+
-  labs(x='Index')
+  labs(x="Cook's Distance")
 
 ```
 
@@ -647,43 +638,37 @@ stargazer( apostasyExtension, style = 'AJPS',single.row = TRUE,
           dep.var.labels   = c("Disaffiliation", "Disaffiliation"),
           report = "vcp*",
           model.names = FALSE,
-          initial.zero = FALSE)
+          initial.zero = FALSE,
+          type='html')
 
 ```
-\begin{table}[!htbp] \centering 
-  \caption{Modified Disaffiliation Model} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline \\[-1.8ex] 
-\\[-1.8ex] & \textbf{Disaffiliation} \\ 
-\hline \\[-1.8ex] 
- Partisan Difference with Congregation & .091 \\ 
-  & p = .552 \\ 
-  Political Differences & $-$.402 \\ 
-  & p = .344 \\ 
-  Catholic & 1.101 \\ 
-  & p = .498 \\ 
-  Mainline Protestant & .389 \\ 
-  & p = .822 \\ 
-  Black Protestant & $-$2.030 \\ 
-  & p = .515 \\ 
-  Age & $-$.048 \\ 
-  & p = .002$^{***}$ \\ 
-  Political Differences X Catholic & $-$.416 \\ 
-  & p = .505 \\ 
-  Political Differences X Mainline & $-$.107 \\ 
-  & p = .870 \\ 
-  Political Differences X Black Protestant & .939 \\ 
-  & p = .399 \\ 
-  Constant & .503 \\ 
-  & p = .711 \\ 
- N & 376 \\ 
-Log Likelihood & $-$104.413 \\ 
-AIC & 228.825 \\ 
-\hline \\[-1.8ex] 
-\multicolumn{2}{l}{$^{***}$p $<$ .01; $^{**}$p $<$ .05; $^{*}$p $<$ .1} \\ 
-\end{tabular} 
-\end{table}
+<table style="text-align:center"><caption><strong>Modified Disaffiliation Model</strong></caption>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><strong>Disaffiliation</strong></td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Partisan Difference with Congregation</td><td>.091</td></tr>
+<tr><td style="text-align:left"></td><td>p = .552</td></tr>
+<tr><td style="text-align:left">Political Differences</td><td>-.402</td></tr>
+<tr><td style="text-align:left"></td><td>p = .344</td></tr>
+<tr><td style="text-align:left">Catholic</td><td>1.101</td></tr>
+<tr><td style="text-align:left"></td><td>p = .498</td></tr>
+<tr><td style="text-align:left">Mainline Protestant</td><td>.389</td></tr>
+<tr><td style="text-align:left"></td><td>p = .822</td></tr>
+<tr><td style="text-align:left">Black Protestant</td><td>-2.030</td></tr>
+<tr><td style="text-align:left"></td><td>p = .515</td></tr>
+<tr><td style="text-align:left">Age</td><td>-.048</td></tr>
+<tr><td style="text-align:left"></td><td>p = .002<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Political Differences X Catholic</td><td>-.416</td></tr>
+<tr><td style="text-align:left"></td><td>p = .505</td></tr>
+<tr><td style="text-align:left">Political Differences X Mainline</td><td>-.107</td></tr>
+<tr><td style="text-align:left"></td><td>p = .870</td></tr>
+<tr><td style="text-align:left">Political Differences X Black Protestant</td><td>.939</td></tr>
+<tr><td style="text-align:left"></td><td>p = .399</td></tr>
+<tr><td style="text-align:left">Constant</td><td>.503</td></tr>
+<tr><td style="text-align:left"></td><td>p = .711</td></tr>
+<tr><td style="text-align:left">N</td><td>376</td></tr>
+<tr><td style="text-align:left">Log Likelihood</td><td>-104.413</td></tr>
+<tr><td style="text-align:left">AIC</td><td>228.825</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="2" style="text-align:left"><sup>***</sup>p < .01; <sup>**</sup>p < .05; <sup>*</sup>p < .1</td></tr>
+</table>
 
 The results, unfortunately, are not significant. Although the signs of the coefficients are as we predicted for the interaction terms with Catholics and Mainline protestants, the sign is not what we expected for the interaction term with Black Protestants, and significance of all three coefficients is well below the standard threshold.
 
@@ -693,8 +678,8 @@ In retrospect, part, if not all, of the reason for the lack of the results is th
 
 ```{r, echo=FALSE}
 
-ggplot(data, aes(x=pid7 , y=partisanDifference )) + 
-  geom_point() +
+ggplot(data, aes(pid7, partisanDifference )) + 
+  geom_jitter(position=position_jitter(0.1)) +
   ggtitle("Partisan Difference on Partisanship")+
   labs(x='Partisanship', y='Partisan Difference')+
   theme(plot.title = element_text(hjust = 0.5))

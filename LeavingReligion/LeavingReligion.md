@@ -156,6 +156,469 @@ The Prevalence of Reported Differences from Other Church Members
 
 ***Predicting Worship Attendance and Disaffiliation***
 
+<table style="text-align:center">
+<caption>
+<strong>Worship Attendance and Disaffiliation</strong>
+</caption>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<strong>Attendance, Wave 2</strong>
+</td>
+<td>
+<strong>Disaffiliation</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<strong>Model 1</strong>
+</td>
+<td>
+<strong>Model 2</strong>
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Partisan Difference with Congregation
+</td>
+<td>
+</td>
+<td>
+.685<sup>\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+p = .026
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Attendance, Wave 1
+</td>
+<td>
+1.603<sup>\*\*\*</sup>
+</td>
+<td>
+-.226
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.00000
+</td>
+<td>
+p = .181
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Differences Index
+</td>
+<td>
+-2.925
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .160
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Interest
+</td>
+<td>
+.045
+</td>
+<td>
+-.145
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .641
+</td>
+<td>
+p = .305
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Church Discussant
+</td>
+<td>
+-.146
+</td>
+<td>
+.054
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .527
+</td>
+<td>
+p = .887
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Ideology
+</td>
+<td>
+-.190
+</td>
+<td>
+.007
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .320
+</td>
+<td>
+p = .981
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Feelings toward Christian Fundamentalists
+</td>
+<td>
+-.516
+</td>
+<td>
+.680
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .566
+</td>
+<td>
+p = .640
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Female
+</td>
+<td>
+-.068
+</td>
+<td>
+-.085
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .753
+</td>
+<td>
+p = .792
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Income
+</td>
+<td>
+.072
+</td>
+<td>
+-.125
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .295
+</td>
+<td>
+p = .209
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Education
+</td>
+<td>
+-.211<sup>\*</sup>
+</td>
+<td>
+-.059
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .069
+</td>
+<td>
+p = .733
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Age
+</td>
+<td>
+-.012
+</td>
+<td>
+-.035<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .120
+</td>
+<td>
+p = .005
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Mainline Protestant
+</td>
+<td>
+-.389
+</td>
+<td>
+.158
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .205
+</td>
+<td>
+p = .757
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Catholic
+</td>
+<td>
+-.554<sup>\*</sup>
+</td>
+<td>
+.250
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .067
+</td>
+<td>
+p = .609
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Black Protestant
+</td>
+<td>
+-.249
+</td>
+<td>
+.341
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .543
+</td>
+<td>
+p = .598
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Other Religion
+</td>
+<td>
+.425
+</td>
+<td>
+.855
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .282
+</td>
+<td>
+p = .119
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Attendance X Differences
+</td>
+<td>
+.524
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .265
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Attendance X Partisan Difference
+</td>
+<td>
+</td>
+<td>
+-.132
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+p = .109
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Ideology X Fundamentalists
+</td>
+<td>
+.206
+</td>
+<td>
+.134
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .490
+</td>
+<td>
+p = .765
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+</td>
+<td>
+.402
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+p = .788
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+N
+</td>
+<td>
+414
+</td>
+<td>
+441
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+</td>
+<td>
+-147.812
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+AIC
+</td>
+<td>
+</td>
+<td>
+329.625
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:left">
+<sup>***</sup>p \< .01; <sup>**</sup>p \< .05; <sup>*</sup>p \< .1
+</td>
+</tr>
+</table>
+
 As can be seen, Djupe et. al. found that attendance in the first wave
 was the only significant predictor of attendance during the second wave
 and that age and partisan difference were the only statistically
@@ -180,7 +643,7 @@ an ordered logit model.
 
 ***Disaffiliation Residuals Plots***
 
-![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-3.png)<!-- -->![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-4.png)<!-- -->![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-5.png)<!-- -->![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-6.png)<!-- -->
+![](LeavingReligion_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 I have included above a few examples of plots of the pearson residuals
 of the regression on various independent variables. One can see that
@@ -194,6 +657,446 @@ with age.
 
 There are 19 observations for which the DFBETAS are over the usual
 cutoff. If we remove these observations, we get these results:
+
+<table style="text-align:center">
+<caption>
+<strong>Disaffiliation with Influence Points Removed</strong>
+</caption>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="2">
+<strong>Disaffiliation</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<strong>Original</strong>
+</td>
+<td>
+<strong>Trimmed of Influence Points</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<strong>Model 1</strong>
+</td>
+<td>
+<strong>Model 2</strong>
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Partisan Difference with Congregation
+</td>
+<td>
+.685
+</td>
+<td>
+1.223
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .026<sup>\*\*</sup>
+</td>
+<td>
+p = .002<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Attendance, Wave 1
+</td>
+<td>
+-.226
+</td>
+<td>
+.028
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .181
+</td>
+<td>
+p = .888
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Interest
+</td>
+<td>
+-.145
+</td>
+<td>
+.107
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .305
+</td>
+<td>
+p = .532
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Church Discussant
+</td>
+<td>
+.054
+</td>
+<td>
+-.101
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .887
+</td>
+<td>
+p = .810
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Ideology
+</td>
+<td>
+.007
+</td>
+<td>
+.674
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .981
+</td>
+<td>
+p = .096<sup>\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Feelings toward Christian Fundamentalists
+</td>
+<td>
+.680
+</td>
+<td>
+4.215
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .640
+</td>
+<td>
+p = .030<sup>\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Female
+</td>
+<td>
+-.085
+</td>
+<td>
+.286
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .792
+</td>
+<td>
+p = .440
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Income
+</td>
+<td>
+-.125
+</td>
+<td>
+-.067
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .209
+</td>
+<td>
+p = .559
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Education
+</td>
+<td>
+-.059
+</td>
+<td>
+.161
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .733
+</td>
+<td>
+p = .438
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Age
+</td>
+<td>
+-.035
+</td>
+<td>
+-.034
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .005<sup>\*\*\*</sup>
+</td>
+<td>
+p = .022<sup>\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Mainline Protestant
+</td>
+<td>
+.158
+</td>
+<td>
+.822
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .757
+</td>
+<td>
+p = .182
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Catholic
+</td>
+<td>
+.250
+</td>
+<td>
+1.006
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .609
+</td>
+<td>
+p = .094<sup>\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Black Protestant
+</td>
+<td>
+.341
+</td>
+<td>
+.983
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .598
+</td>
+<td>
+p = .172
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Other Religion
+</td>
+<td>
+.855
+</td>
+<td>
+1.839
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .119
+</td>
+<td>
+p = .006<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Attendance X Partisan Difference
+</td>
+<td>
+-.132
+</td>
+<td>
+-.244
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .109
+</td>
+<td>
+p = .012<sup>\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Ideology X Fundamentalists
+</td>
+<td>
+.134
+</td>
+<td>
+-.577
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .765
+</td>
+<td>
+p = .302
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+.402
+</td>
+<td>
+-6.555
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .788
+</td>
+<td>
+p = .003<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+N
+</td>
+<td>
+441
+</td>
+<td>
+422
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-147.812
+</td>
+<td>
+-113.988
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+AIC
+</td>
+<td>
+329.625
+</td>
+<td>
+261.975
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:left">
+<sup>***</sup>p \< .01; <sup>**</sup>p \< .05; <sup>*</sup>p \< .1
+</td>
+</tr>
+</table>
 
 The removal of these observations (unsurprisingly) decreases the AIC of
 the regression. More interesting, however, is that with their removal,
@@ -331,6 +1234,210 @@ that the coefficients for the denomination X partisanship interaction
 terms will be less than zero (since the Evangelicals, for whom we expect
 the effect to be greatest, are left out). Below are the results of this
 regression on the 2012 panel data.
+
+<table style="text-align:center">
+<caption>
+<strong>Modified Disaffiliation Model</strong>
+</caption>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<strong>Disaffiliation</strong>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Partisan Difference with Congregation
+</td>
+<td>
+.091
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .552
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Differences
+</td>
+<td>
+-.402
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .344
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Catholic
+</td>
+<td>
+1.101
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .498
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Mainline Protestant
+</td>
+<td>
+.389
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .822
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Black Protestant
+</td>
+<td>
+-2.030
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .515
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Age
+</td>
+<td>
+-.048
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .002<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Differences X Catholic
+</td>
+<td>
+-.416
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .505
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Differences X Mainline
+</td>
+<td>
+-.107
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .870
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Political Differences X Black Protestant
+</td>
+<td>
+.939
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .399
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+.503
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = .711
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+N
+</td>
+<td>
+376
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-104.413
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+AIC
+</td>
+<td>
+228.825
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:left">
+<sup>***</sup>p \< .01; <sup>**</sup>p \< .05; <sup>*</sup>p \< .1
+</td>
+</tr>
+</table>
 
 The results, unfortunately, are not significant. Although the signs of
 the coefficients are as we predicted for the interaction terms with
