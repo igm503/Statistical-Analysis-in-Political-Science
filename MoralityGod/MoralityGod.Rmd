@@ -4,8 +4,8 @@ author: "Ian Myers"
 date: "3/17/2020"
 geometry: margin=4cm
 output:
-  pdf_document: default
-  html_document: default
+  github_document:
+    pandoc_args: --webtex
 
 ---
 
@@ -227,7 +227,7 @@ p + stat_function(fun = GeneticGologitDecrease, color = "red") +
 
 ```
 
-```{r, echo=FALSE, include=FALSE}
+```{r, echo=TRUE, include=FALSE}
 
 #ologit
 
@@ -239,7 +239,7 @@ data$GodDiffFactor = factor(data$GodDiffSign)
 #regression
 
 ologit = polr(GodDiffFactor ~ AbortionDiff + GenEngineeringDiff + Income + Age + Male, data=data, Hess=TRUE)
-stargazer(ologit)
+stargazer(ologit, type='html')
 brant(ologit)
 
 ```

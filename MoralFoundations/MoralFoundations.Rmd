@@ -1,8 +1,11 @@
 ---
-title: "Mathematical Methods for Political Analysis Project"
+title: "Mathematical Methods for Political Analysis"
 author: "Ian Myers"
 date: "5/7/2020"
-output: pdf_document
+output:
+  github_document:
+    pandoc_args: --webtex
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -17,10 +20,11 @@ library(stargazer)
 library(ggplot2)
 library(psych)
 library(kableExtra)
+library(GPArotation)
 ```
 
 ```{r Data Prep, echo=FALSE}
-load("~/Measuring-Morality-Files-12-6/MMdata_merged.rdata")
+load("data/MMdata_merged.rdata")
 data <- MMdata_merged
 
 #Remove Observations that Refused to Answer
