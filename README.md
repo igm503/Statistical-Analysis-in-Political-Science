@@ -14,9 +14,11 @@ The replication data provided by the authors is hosted at https://dataverse.harv
 
 This is an independent study using panel data. I theorize that participants in the panel whose moral evaluations weaken--that is, who come to see fewer issues 
 as morally wrong or even morally relevant--will also experience a decrease in their subjective certainty about the existence of God, and vice versa. The results
-are positive, but weaker than I expected. The main weakness of this investigation is weak data on morality. PALS only contains two questions that are suitable
+are positive, but weaker than I expected. The main weakness of this investigation is weak data on morality. The data only contains two questions that are suitable
 for measuring the "strength" of a participant's moral evaluations, and those questions are about abortion and genetic engineering, which are more politically
 charged than I'd like the questions to be.
+
+The data is the Portraits of American Life two-wave survey. It can be found here: https://www.thearda.com/data-archive?fid=PALS2PAN
 
 An appendix contains an introduction to MLE, ologit, gologit, and MLE estimation of those models.
 
